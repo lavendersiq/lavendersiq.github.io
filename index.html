@@ -1,19 +1,192 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lavenders</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lavenders | مستحضرات تجميل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <style>
-body{font-family:sans-serif;text-align:center;padding:60px 20px;background:#FBF4F2;color:#331823;}
-h1{font-size:36px;color:#B23A5C;}
-p{font-size:16px;color:#6b4c58;}
-a{display:inline-block;margin-top:20px;background:#25D366;color:#fff;padding:14px 28px;border-radius:30px;text-decoration:none;font-weight:bold;}
+:root{--bg:#fdfdfd;--c:#fff;--p:#111;--pd:#000;--t:#111;--m:#77727f;--b:#ece8f1;--er:#c8321f;--sh:#f4f0f8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tajawal,Tahoma,sans-serif;background:var(--bg);color:var(--t);line-height:1.6}
+header{direction:ltr;background:rgba(253,253,253,.94);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:14px 18px;position:sticky;top:0;z-index:5}
+.ic{display:flex;gap:16px;align-items:center;min-width:72px}.ic:last-child{justify-content:flex-end}
+.ic svg{width:26px;height:26px;fill:none;stroke:#111;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;cursor:pointer}
+.bn svg{width:24px;height:24px;fill:none;stroke:#111;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:stroke .3s}
+.logo{height:23px;width:176px;cursor:pointer;display:block}
+main{max-width:1000px;margin:auto;padding:8px 16px 120px}
+.hero{text-align:center;padding:14px 10px 10px;color:var(--m)}
+.bn{direction:ltr;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:2px;padding:7px;border-radius:99px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.28));-webkit-backdrop-filter:blur(22px) saturate(1.9);backdrop-filter:blur(22px) saturate(1.9);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 1px 2px rgba(0,0,0,.05),0 6px 12px rgba(0,0,0,.07),0 20px 36px -6px rgba(0,0,0,.2),inset 0 2px 1px rgba(255,255,255,.95),inset 0 -6px 14px rgba(255,255,255,.4),0 0 0 1px rgba(0,0,0,.05);z-index:6}
+.bn a{position:relative;height:48px;min-width:52px;padding:0 13px;display:flex;align-items:center;justify-content:center;border-radius:99px;cursor:pointer;transition:background .3s,padding .3s}.bn span{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:700;transition:max-width .35s,opacity .25s,margin .35s}
+.bn a.on{background:#111;padding:0 18px;box-shadow:0 6px 14px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.25)}.bn a.on svg{stroke:#fff}.bn a.on span{max-width:90px;opacity:1;margin-inline-start:8px;color:#fff}
+.bn b{position:absolute;top:3px;right:6px;background:var(--er);color:#fff;border-radius:99px;font-size:11px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px}
+.menu{position:fixed;top:62px;right:14px;background:#fff;border:1px solid var(--b);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:6px;z-index:7;display:none;min-width:170px}
+.menu.on{display:block}.menu a{display:block;padding:10px 14px;cursor:pointer;border-radius:8px}.menu a:hover{background:var(--sh)}
+#sb{display:none;padding:0 16px}#sb.on{display:block}
+.in{width:100%;padding:11px 12px;border:1px solid var(--b);border-radius:10px;font:inherit;margin:5px 0;background:#fff}
+.in:focus{outline:2px solid var(--p)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 0}
+.chip{white-space:nowrap;padding:6px 14px;border-radius:99px;background:#fff;border:1px solid var(--b);cursor:pointer;font-size:14px}
+.chip.on{background:var(--pd);color:#fff;border-color:var(--pd)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin-bottom:10px}
+.grid .card{margin:0;display:flex;flex-direction:column;gap:4px}
+.card h3{margin:0;font-size:16px}
+.img{aspect-ratio:1;background:var(--sh);border-radius:10px;display:grid;place-items:center;font-size:40px;overflow:hidden}
+.img img{width:100%;height:100%;object-fit:cover}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.m{color:var(--m);margin:0;font-size:13px}
+.er{color:var(--er);font-size:13px}
+.btn{background:var(--p);color:#fff;border:0;border-radius:10px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--pd)}.btn.big{width:100%;padding:13px;margin-top:8px;font-size:16px}
+.btn.del{background:var(--er)}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--b)}
+.qty{display:flex;align-items:center;gap:10px}.qty button{width:30px;height:30px;border-radius:8px;border:1px solid var(--b);background:#fff;font-size:18px;cursor:pointer}
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--pd);color:#fff;padding:10px 18px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:9;max-width:90%}
+#toast.on{opacity:1}
+ul{padding-inline-start:18px;margin:6px 0}
 </style>
 </head>
 <body>
-<h1>Lavenders</h1>
-<p>موقعنا قيد التجهيز... تابعونا قريباً!</p>
-<a href="https://wa.me/9647837377311">تواصل عبر واتساب</a>
+<header>
+  <div class="ic"><svg onclick="wa()" viewBox="0 0 24 24"><path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z"/></svg><svg onclick="toggleSearch()" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+  <svg class="logo" viewBox="0 0 1000 131" role="img" aria-label="Lavenders" onclick="go('shop')"><path fill="#111" fill-rule="evenodd" d="M793 2.3 793 128.5 793.4 128.9 794.3 128.7 794.7 128.9 808.2 128.9 808.3 128.7 813.6 128.7 813.8 128.5 813.8 71.8 814.2 71.5 829.2 71.3 829.4 71.5 845.5 71.7 847.8 72.2 851.8 73.9 855.2 76.4 856.7 77.9 859.5 81.3 861.6 84.9 863.3 88.9 863.9 91 864.5 91.9 865.2 94.6 865.6 95 866.2 97.3 866.7 98.2 867.9 102 869.4 105.6 869.6 106.7 870.1 107.5 870.1 108.1 871.3 110.5 871.3 111.1 871.8 112 871.8 112.6 872.4 113.6 873 115.6 878.5 128.7 879.1 128.9 879.6 128.7 880 128.9 885.1 128.9 885.3 128.7 898.8 128.9 899.1 128.3 898.6 127.8 898.6 127.4 897.1 124.9 894.6 119.4 894.6 118.9 894 118.1 894 117.5 893.5 116.6 893.5 116 892.9 115.1 892.1 112.6 891.8 112.2 891.8 111.7 891.2 110.7 891.2 110.1 888.9 104.6 888.9 104.1 888.3 103.1 888.3 102.4 886.6 98.6 886.6 98 886.1 97.1 886.1 96.5 885.5 95.5 885.5 95 884.9 94 884.4 91.9 883.8 91 883.8 90.4 883.2 89.7 883.2 89.1 881.5 85.7 879.4 82.5 876.4 79.1 873.9 77 870.3 74.7 864.5 72.2 863.5 72.2 862.7 71.8 859.1 71.1 857.4 71.1 857.1 70.7 857.3 70.3 858.2 70 861.4 69.8 862.2 69.4 864.1 69.2 868.1 68.1 872.6 66.4 878.7 63.1 881.9 61 884 59.3 888 55.2 891 51 892.7 47.6 894 43.2 894.6 39.4 894.6 33.6 894 30 892.9 26 891.6 23.1 888.2 18 884.5 14.4 881.7 12.1 877.9 9.9 873.4 7.6 867.1 5.3 862.9 4.2 861 4 859.1 3.4 857.8 3.4 856.9 3 851.8 2.5 843.4 2.3 843.2 2.1 793.4 2.1ZM814.2 4.5 845.9 4.5 847.6 5.1 849.3 5.1 850.8 5.7 852.3 5.9 858 8 862.7 11 866.7 14.8 870.1 19.7 872.8 26.2 873.6 29.4 873.6 30.9 874.1 33.9 874.1 40.4 873.7 41.7 873.6 45.1 873 46.6 873 47.6 871.3 52.1 868.1 57.6 865.2 60.9 862.2 63.3 856.7 66.5 854.8 67.1 853.8 67.7 853.1 67.7 849.1 68.8 847.8 68.8 845.3 69.4 814.2 69.4 813.8 69 813.8 4.9ZM694.4 2.3 694.4 128.5 695 128.9 695.4 128.7 695.7 128.9 781.8 128.7 782 128.5 781.8 126.8 770.2 126.8 770 126.6 716.2 126.6 716 126.8 715.1 126.3 715.1 61.2 715.6 60.7 769.3 60.7 769.5 60.5 769.5 59 768.9 58.4 757.2 58.4 757 58.6 716.4 58.4 715.8 58.6 715.1 58 715.1 4.9 715.5 4.5 781.4 4.5 782 4 781.8 2.3 781.2 2.1 780.7 2.3 779.9 2.1 694.8 2.1ZM561.5 2.5 561.5 128.5 562.3 128.9 612.5 128.7 623.5 127.4 624.3 127 627.9 126.4 634.3 124.7 642.5 121.7 645.3 120.2 647.4 119.4 651.8 117.2 657.1 113.7 665.2 107.1 670.5 101.2 673.6 97.1 675.1 94.6 677.9 88.9 680 83.2 681.7 77 682.7 68.6 682.7 62.4 682.5 62.2 682.3 57.4 681.3 52.3 679.6 46.4 677.2 40.2 674.5 35.3 671.5 30.7 667.9 26.4 662.9 21.4 659.9 19 654.2 15 650.4 12.7 640.4 8.2 639.2 8 638.9 7.6 638.3 7.6 633.6 5.9 630 5.1 629.2 4.7 627.5 4.5 626.7 4.2 619.1 2.8 617.3 2.8 615.7 2.5 612.9 2.5 612.7 2.3 609.5 2.3 609.3 2.1 562.3 2.1ZM582.9 4 583.3 4.2 584.5 4 585.2 4.2 591.7 4.2 591.8 4 607.2 4 608 4.2 609.3 4 609.5 4.2 615.7 4.5 623.1 6.3 626 7.4 626.5 7.4 630.3 9.1 635.8 12.1 640 15.2 642.8 17.6 646.8 21.8 649.3 25 652.5 30.1 655 35.1 657.1 40.6 658.6 46.1 659.9 53.3 660.3 60.5 660.5 60.7 660.5 70.3 660.1 72.2 659.9 76 659 81.7 657.8 86.3 655.9 92.1 653.8 97.1 651.4 101.2 651.4 101.6 648 106.7 645.1 110.1 640.8 114.5 636.8 117.7 630.9 121.3 624.5 124.2 617.4 126.1 610.2 126.8 585.6 126.8 585.4 126.6 582.7 126.6 582.4 126.3 582.4 4.5ZM440.8 2.1 440.4 2.5 440.4 128.5 440.6 128.7 442.5 128.5 442.5 16.3 442.8 16.1 459.5 35.8 463.1 40.6 467.5 45.5 479.4 60.5 481.9 63.1 493.1 77.3 495.2 79.6 508.4 96.3 512.8 101.4 516.2 106 525.5 117.2 534.2 128.3 535.2 128.9 535.5 128.7 544.5 128.7 544.6 128.3 544.6 2.5 544.1 2.1 542.6 2.1 542.2 2.5 542.4 104.5 541.8 104.8 520.9 79.8 518.7 76.8 512.6 69.8 499.1 52.9 494.4 47.4 476.6 25.4 466.2 13.3 457.8 2.8 456.9 2.1ZM340.9 2.3 340.7 2.7 340.9 3 340.9 128 340.7 128.2 340.9 128.5 341.4 128.9 342.2 128.7 342.6 128.9 359.6 128.9 359.8 128.7 427.9 128.9 428.6 128.7 428.8 127.2 428.2 126.6 362.3 126.6 361.9 126.1 362.1 125.5 362.1 67.1 361.9 66.9 362.1 62 361.9 61.4 362.1 61 362.7 60.7 363.4 60.9 363.6 60.7 415.7 60.7 416.1 60.5 416.1 58.8 415.4 58.4 415.2 58.6 366.6 58.6 366.4 58.4 362.3 58.4 361.9 57.8 362.1 57.3 362.1 5.5 361.9 5.1 362.5 4.5 428.1 4.5 428.6 4.2 428.6 2.5 428.2 2.1 341.2 2.1ZM203.2 2.1 203 3 237.9 72.8 239.1 75.6 240.8 78.5 241.9 81.3 247.6 92.3 251 99.7 262.4 122.5 265.6 128.5 266 128.9 267.1 128.7 269.8 122.8 271.3 120.2 272 117.9 273 116.4 274.3 113 275.8 110.1 276 109.2 276.4 108.8 278.9 102.9 279.8 101.4 280 100.5 282.7 95.2 284 91.8 284.4 91.4 285.7 88.2 287.2 85.5 287.4 84.5 291.9 75.5 291.9 74.9 298.6 61.6 301.6 54.8 304.5 49.5 305.6 46.6 307.9 42.5 310.9 35.6 313.6 30.9 327.8 2.5 327.2 2.1 325.7 2.1 325.1 2.5 324 4.4 322.3 8.2 315.5 21 308.1 35.8 306.7 39.1 304.1 44.2 303.5 45.9 301.2 50 295.9 61.6 292.5 68.2 291.4 71.3 288 77.9 285.1 84.5 283.4 87.6 282.3 90.6 280.6 93.6 277.2 101.8 276 103.7 276 104.3 275.3 104.6 273.2 100.9 271.5 96.7 268.6 91.4 264.5 82.3 263.9 81.5 263.3 79.8 240.6 34.3 238.9 30.3 237.2 27.3 235.5 23.1 233.2 19 232 16.1 227.5 7.2 225.4 2.5 224.8 2.1 206.4 2.1 206.3 2.3ZM0.4 2.1 0 2.5 0 128.5 2.1 128.9 22.4 128.9 22.6 128.7 83.6 128.9 83.8 128.7 88.2 128.7 88.5 128.2 88.3 127 88 126.6 87.4 126.8 86.6 126.6 21.8 126.6 21.4 126.3 21.4 2.5 21 2.1ZM162.1 1.9 161.5 2.5 152.2 22.4 150 26.5 145.4 36.4 141.4 44.2 140.7 46.3 139.1 48.9 134.4 59.3 132.3 63.1 128.2 72.4 121.9 84.7 117.9 93.5 113.9 101 113.4 102.7 104.3 120.8 103.1 123.6 100.5 128.3 100.7 128.7 102.6 128.9 103.5 128.2 104.8 124.9 117.2 100.3 119.1 95.7 123.6 86.6 124.2 86.1 168.9 85.9 169.1 86.1 183.1 86.1 183.7 86.6 188.2 96.9 191.1 102.4 191.7 104.1 193.9 108.4 195.3 111.8 199.1 119.4 199.6 121.1 203.2 128.7 203.6 128.9 204.5 128.7 206.4 128.7 206.6 128.9 225.2 128.7 225.2 128.2 224.6 127.4 224.1 125.7 221.8 121.3 219.5 116 217.3 111.8 216.7 110.1 213.3 103.7 211.6 99.5 196.2 69 194.9 65.8 191.1 58.6 190 55.7 176.3 28.4 173.8 24.1 164.7 5.5 162.8 2.1ZM153.6 24.5 154.3 24.8 156.6 29.4 157.3 31.5 159.6 35.6 160.4 37.7 162.1 40.8 166.6 50.8 168.9 55 170 57.8 172.7 62.9 174 66.4 177.4 73 180.3 79.6 182.4 83.4 182 84 127.2 84 125.3 83.6 125.3 83 135 63.7 136.9 59.1 144.1 44.7 146.4 39.2 150.3 31.5ZM952.4 0 944.6 0.8 943.7 1.1 941.4 1.3 940.9 1.7 939 1.9 938.4 2.3 935 3 930.6 4.7 925.5 7.6 925.1 7.6 920.8 10.8 915.3 16.5 913.6 19.1 912.4 21.4 912.2 22.4 911.8 22.7 910.7 26.4 910.1 29.4 910.1 36 910.7 39.1 911.8 42.5 913.6 45.9 915.6 49.1 920.4 54.2 925.9 58.6 929.7 61 930 61 936.7 65 946.9 70.5 954.1 73.9 954.7 74.5 956.2 75.1 958.9 76.8 960.4 77.3 965.1 80.2 967.6 81.3 972.7 84.5 976.9 87.8 980.7 91.6 981.8 93.1 984.8 99.1 985.8 103.1 985.8 107.3 985.2 110.9 984.6 112.8 982.9 116.4 980.9 119.2 976.7 123.2 972.3 125.9 967.8 127.6 962.5 128.7 959.2 128.9 957.9 129.3 949 129.3 945.6 128.7 943.9 128.7 935.9 127 935.4 126.6 931 125.3 930.6 124.9 929.7 124.7 925.1 122.5 920.6 119.6 917.7 117.3 913.9 113.6 910.9 109.8 910.1 110 908.4 111.5 908.2 112.4 912.2 116.6 917.9 121.1 924 124.7 929.1 127 929.7 127 931.8 128 934.8 128.7 935.9 129.3 936.9 129.3 938.2 129.9 939.1 129.9 942.2 130.6 947.3 131.2 950 131.2 950.1 131.4 957.2 131.4 965.5 130.4 974.2 128.2 978.6 126.4 982.4 124.5 984.8 123 989.8 119.2 994.1 114.5 996.4 110.9 998.3 106.9 999.1 104.8 999.8 101.4 1000 92.1 998.9 86.8 997.7 84 995.5 79.8 991.5 74.7 985.2 69 980.3 65.4 970.6 59.5 961.1 54.8 958.3 53.1 954.5 51.4 947.3 47.4 945.8 46.8 944.1 45.7 936.1 41.5 931 38.1 928.3 35.8 926.1 33.4 924.4 30.7 923.2 28.1 923 26.4 922.7 25.6 922.7 21.4 923 20.7 923 19.1 923.6 18 923.6 17.3 924.9 14.6 926.6 12.1 929.7 9.1 931.2 8 936.1 5.3 939.7 4 940.5 4 944.1 2.8 947.7 2.3 951.1 2.3 951.3 2.1 959.8 2.3 961.1 2.7 964.2 2.8 965.1 3.2 967.2 3.4 967.8 3.8 971.2 4.5 973.6 5.7 975.7 6.3 981.4 9.1 986.9 13.1 987.5 13.1 988.1 12.5 989.6 10.2 989.4 9.9 986.5 8.2 982 5.9 974.4 3 970.6 2.3 970 1.9 968 1.7 967.2 1.3 964.9 1.1 962.5 0.6 958.3 0.4 956.6 0Z"/></svg>
+  <div class="ic"><svg onclick="toggleMenu()" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+</header>
+<div id="sb"><input class="in" placeholder="ابحث عن منتج..." oninput="S.q=this.value;if(S.view!='shop')go('shop');else grid()"></div>
+<div class="menu" id="menu"></div>
+<main id="app"></main>
+<div class="bn" id="bn"></div>
+<div id="toast"></div>
+<script>
+// ====== ضع بيانات Supabase هنا (Project Settings > API) ======
+const SUPA_URL='https://nkbqwquyukgqhroksdpc.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5rYnF3cXV5dWtncWhyb2tzZHBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MTc5NDgsImV4cCI6MjEwNjE5Mzk0OH0.BRUcb56-_LJW6U9MqJeb35Hkh0OE1P-ooiwGBo23ZWY';
+// ==============================================================
+const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n).toLocaleString('en')+' د.ع';
+const ST=['جديد','قيد التجهيز','تم الشحن','مكتمل','ملغي'];
+let S={user:null,admin:false,profile:{},products:[],cart:JSON.parse(localStorage.getItem('cart')||'[]'),view:'shop',cat:'',q:'',tab:'p',edit:0,mode:'in'};
+const save=()=>localStorage.setItem('cart',JSON.stringify(S.cart));
+const cc=()=>nav();
+const WA='9647837377311'; // رقم واتساب المتجر بصيغة دولية بدون +
+const wa=()=>open('https://wa.me/'+WA,'_blank');
+const toggleMenu=()=>$('#menu').classList.toggle('on');
+function toggleSearch(){const b=$('#sb');b.classList.toggle('on');if(b.classList.contains('on'))b.querySelector('input').focus()}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on'),2600)}
+const go=v=>{S.view=v;$('#menu').classList.remove('on');render();scrollTo(0,0)};
+
+async function load(){const{data}=await sb.from('products').select('*').order('id',{ascending:false});S.products=data||[];
+  S.cart=S.cart.filter(i=>S.products.some(p=>p.id==i.id))}
+async function setUser(u){S.user=u||null;S.admin=false;S.profile={};
+  if(u){const[a,p]=await Promise.all([sb.from('admins').select('id').eq('id',u.id).maybeSingle(),sb.from('profiles').select('*').eq('id',u.id).maybeSingle()]);S.admin=!!a.data;S.profile=p.data||{}}}
+async function init(){const{data:{session}}=await sb.auth.getSession();await setUser(session?.user);await load();render()}
+
+function nav(){
+  const ic={u:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6z"/></svg>',c:'<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>',g:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>',h:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>'};
+  const n=S.cart.reduce((a,i)=>a+i.qty,0);
+  const T=[['u','حسابي',S.user?'orders':'auth',['orders','auth']],['c','السلة','cart',['cart']],['g','الأقسام','cats',['cats']],['h','الرئيسية','shop',['shop']]];
+  $('#bn').innerHTML=T.map(([k,l,v,vs])=>`<a class="${vs.includes(S.view)?'on':''}" onclick="go('${v}')">${ic[k]}${k=='c'&&n?`<b>${n}</b>`:''}<span>${l}</span></a>`).join('')}
+function menu(){$('#menu').innerHTML=S.user?`<a onclick="go('orders')">طلباتي</a>`+(S.admin?`<a onclick="go('admin')">لوحة التحكم</a>`:'')+`<a onclick="logout()">تسجيل الخروج</a>`:`<a onclick="go('auth')">تسجيل الدخول</a>`}
+function render(){nav();menu();V[S.view]()}
+
+const V={
+shop(){
+  const cats=[...new Set(S.products.map(p=>p.category).filter(Boolean))];
+  $('#app').innerHTML=`<div class="hero">عناية وجمال بلمسة لافندر</div>
+  <div class="chips"><span class="chip ${!S.cat?'on':''}" onclick="S.cat='';render()">الكل</span>${cats.map(c=>`<span class="chip ${S.cat==c?'on':''}" data-c="${esc(c)}" onclick="S.cat=this.dataset.c;render()">${esc(c)}</span>`).join('')}</div>
+  <div id="grid" class="grid"></div>`;grid()},
+cats(){const cs=[...new Set(S.products.map(p=>p.category).filter(Boolean))];
+  $('#app').innerHTML='<h2>الأقسام</h2>'+(cs.map(c=>`<div class="card row" style="cursor:pointer;padding:18px" data-c="${esc(c)}" onclick="S.cat=this.dataset.c;go('shop')"><b>${esc(c)}</b><span>‹</span></div>`).join('')||'<p class="m">لا توجد أقسام بعد.</p>')},
+cart(){
+  const rows=S.cart.map(i=>({...i,p:S.products.find(x=>x.id==i.id)})).filter(r=>r.p);
+  const tot=rows.reduce((a,r)=>a+r.p.price*r.qty,0),pr=S.profile;
+  $('#app').innerHTML=`<h2>سلة المشتريات</h2>`+(rows.length?
+   rows.map(r=>`<div class="line"><span>${esc(r.p.name)}<br><small class="m">${fmt(r.p.price)}</small></span>
+   <span class="qty"><button onclick="qty(${r.id},-1)">−</button>${r.qty}<button onclick="qty(${r.id},1)">+</button></span><b>${fmt(r.p.price*r.qty)}</b></div>`).join('')+
+   `<div class="line"><b>المجموع</b><b>${fmt(tot)}</b></div>`+
+   (S.user?`<h3>معلومات التوصيل</h3><input class="in" id="n" placeholder="الاسم" value="${esc(pr.full_name)}"><input class="in" id="ph" placeholder="رقم الهاتف" inputmode="tel" value="${esc(pr.phone)}"><textarea class="in" id="ad" placeholder="العنوان بالتفصيل">${esc(pr.address)}</textarea><input class="in" id="nt" placeholder="ملاحظات (اختياري)"><button class="btn big" onclick="checkout()">تأكيد الطلب (الدفع عند الاستلام)</button>`
+   :`<button class="btn big" onclick="go('auth')">سجّل دخولك لإتمام الطلب</button>`)
+   :`<p class="m">السلة فارغة. تصفح المنتجات وأضف ما يعجبك.</p><button class="btn" onclick="go('shop')">تصفح المتجر</button>`)},
+auth(){
+  const up=S.mode=='up';
+  $('#app').innerHTML=`<div class="card" style="max-width:420px;margin:auto"><h2>${up?'إنشاء حساب':'تسجيل الدخول'}</h2>
+  ${up?`<input class="in" id="an" placeholder="الاسم الكامل"><input class="in" id="ap" placeholder="رقم الهاتف" inputmode="tel"><textarea class="in" id="aa" placeholder="العنوان"></textarea>`:''}
+  <input class="in" id="ae" type="email" placeholder="الإيميل"><input class="in" id="aw" type="password" placeholder="كلمة السر (6 أحرف على الأقل)">
+  <button class="btn big" onclick="doAuth()">${up?'إنشاء الحساب':'دخول'}</button>
+  <p class="m" style="text-align:center;cursor:pointer;margin-top:12px" onclick="S.mode='${up?'in':'up'}';render()">${up?'عندي حساب — دخول':'ما عندي حساب — سجّل الآن'}</p></div>`},
+async orders(){
+  if(!S.user)return go('auth');
+  $('#app').innerHTML='<h2>طلباتي</h2><div id="ol"></div>';
+  const{data}=await sb.from('orders').select('*,order_items(*)').eq('user_id',S.user.id).order('id',{ascending:false});
+  $('#ol').innerHTML=oh(data,0)},
+async admin(){
+  if(!S.admin)return go('shop');
+  $('#app').innerHTML=`<h2>لوحة التحكم</h2><div class="chips"><span class="chip ${S.tab=='p'?'on':''}" onclick="S.tab='p';render()">المنتجات</span><span class="chip ${S.tab=='o'?'on':''}" onclick="S.tab='o';render()">الطلبات</span></div><div id="ad2"></div>`;
+  if(S.tab=='o'){const{data}=await sb.from('orders').select('*,order_items(*)').order('id',{ascending:false});$('#ad2').innerHTML=oh(data,1);return}
+  const e=S.products.find(p=>p.id==S.edit)||{};
+  $('#ad2').innerHTML=`<div class="card"><h3>${e.id?'تعديل منتج':'إضافة منتج'}</h3>
+  <input class="in" id="pn" placeholder="اسم المنتج" value="${esc(e.name)}">
+  <input class="in" id="pp" type="number" placeholder="السعر (دينار)" value="${e.price??''}">
+  <input class="in" id="ps" type="number" placeholder="الكمية المتوفرة" value="${e.stock??''}">
+  <input class="in" id="pc" placeholder="القسم (مثلاً: عناية بالبشرة)" value="${esc(e.category)}">
+  <input class="in" id="pi" placeholder="رابط الصورة" value="${esc(e.image_url)}">
+  <textarea class="in" id="pd" placeholder="التفاصيل">${esc(e.description)}</textarea>
+  <label><input type="checkbox" id="pa" ${e.active===false?'':'checked'}> ظاهر بالمتجر</label>
+  <button class="btn big" onclick="saveP(${e.id||0})">حفظ</button></div>`+
+  S.products.map(p=>`<div class="line"><span>${esc(p.name)}${p.active?'':' (مخفي)'}<br><small class="m">${fmt(p.price)} — الكمية ${p.stock}</small></span>
+  <span><button class="btn" onclick="S.edit=${p.id};render();scrollTo(0,0)">تعديل</button> <button class="btn del" onclick="delP(${p.id})">حذف</button></span></div>`).join('')}
+};
+
+function grid(){
+  const q=S.q.toLowerCase(),l=S.products.filter(p=>p.active&&(!S.cat||p.category==S.cat)&&p.name.toLowerCase().includes(q));
+  $('#grid').innerHTML=l.map(p=>`<div class="card"><div class="img">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy">`:'💜'}</div>
+  <h3>${esc(p.name)}</h3><p class="m">${esc(p.description)}</p>
+  <div class="row"><b>${fmt(p.price)}</b>${p.stock>0?`<button class="btn" onclick="add(${p.id})">أضف</button>`:'<span class="er">نفدت الكمية</span>'}</div>
+  ${p.stock>0&&p.stock<=5?`<small class="er">باقي ${p.stock} فقط</small>`:''}</div>`).join('')||'<p class="m">لا توجد منتجات حالياً.</p>'}
+
+function add(id){const p=S.products.find(x=>x.id==id),i=S.cart.find(x=>x.id==id);
+  if((i?i.qty:0)+1>p.stock)return toast('الكمية المتوفرة '+p.stock);
+  i?i.qty++:S.cart.push({id,qty:1});save();cc();toast('أضيف للسلة ✓')}
+function qty(id,d){const i=S.cart.find(x=>x.id==id),p=S.products.find(x=>x.id==id);i.qty+=d;
+  if(i.qty>p.stock){i.qty=p.stock;toast('الكمية المتوفرة '+p.stock)}
+  if(i.qty<=0)S.cart=S.cart.filter(x=>x.id!=id);save();render()}
+
+async function checkout(){
+  const n=$('#n').value.trim(),ph=$('#ph').value.trim(),ad=$('#ad').value.trim();
+  if(!n||!ph||!ad)return toast('أكمل الاسم والرقم والعنوان');
+  const{error}=await sb.rpc('place_order',{p_name:n,p_phone:ph,p_address:ad,p_notes:$('#nt').value,p_items:S.cart});
+  if(error){await load();return toast(error.message)}
+  await sb.from('profiles').upsert({id:S.user.id,full_name:n,phone:ph,address:ad});
+  S.profile={full_name:n,phone:ph,address:ad};S.cart=[];save();await load();toast('تم إرسال طلبك ✓');go('orders')}
+
+async function doAuth(){
+  const e=$('#ae').value.trim(),w=$('#aw').value,up=S.mode=='up';let r;
+  if(up){r=await sb.auth.signUp({email:e,password:w});if(!r.error&&!r.data.session)return toast('تحقق من إيميلك لتفعيل الحساب')}
+  else r=await sb.auth.signInWithPassword({email:e,password:w});
+  if(r.error)return toast(r.error.message);
+  if(up)await sb.from('profiles').upsert({id:r.data.user.id,full_name:$('#an').value,phone:$('#ap').value,address:$('#aa').value});
+  S.mode='in';await setUser(r.data.user);await load();toast('أهلاً بك ✓');go(S.cart.length?'cart':'shop')}
+async function logout(){await sb.auth.signOut();await setUser(null);await load();go('shop')}
+
+const oh=(l,a)=>(l||[]).map(o=>`<div class="card"><div class="row"><b>طلب #${o.id}</b>
+  ${a?`<select class="in" style="width:auto" onchange="setSt(${o.id},this.value)">${ST.map(s=>`<option ${s==o.status?'selected':''}>${s}</option>`).join('')}</select>`:`<span class="chip on">${esc(o.status)}</span>`}</div>
+  ${a?`<p>${esc(o.customer_name)} — <a href="tel:${esc(o.phone)}">${esc(o.phone)}</a><br>${esc(o.address)}${o.notes?'<br>ملاحظة: '+esc(o.notes):''}</p>`:''}
+  <ul>${o.order_items.map(i=>`<li>${esc(i.name)} × ${i.qty}</li>`).join('')}</ul>
+  <div class="row"><b>${fmt(o.total)}</b><small class="m">${new Date(o.created_at).toLocaleString('ar-IQ')}</small></div></div>`).join('')||'<p class="m">لا توجد طلبات.</p>';
+
+async function saveP(id){
+  const r={name:$('#pn').value.trim(),price:+$('#pp').value,stock:parseInt($('#ps').value)||0,category:$('#pc').value.trim()||null,image_url:$('#pi').value.trim()||null,description:$('#pd').value.trim()||null,active:$('#pa').checked};
+  if(!r.name||!($('#pp').value!==''&&r.price>=0))return toast('أكمل الاسم والسعر');
+  const{error}=id?await sb.from('products').update(r).eq('id',id):await sb.from('products').insert(r);
+  if(error)return toast(error.message);S.edit=0;await load();toast('تم الحفظ ✓');render()}
+async function delP(id){if(!confirm('حذف المنتج؟'))return;const{error}=await sb.from('products').delete().eq('id',id);if(error)return toast(error.message);await load();render()}
+async function setSt(id,s){const{error}=await sb.from('orders').update({status:s}).eq('id',id);toast(error?error.message:'تم التحديث ✓')}
+
+init();
+</script>
 </body>
 </html>
