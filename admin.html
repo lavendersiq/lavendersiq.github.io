@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم Lavenders</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{padding-bottom:20px;}
+  .admin-tabs{display:flex;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:10;}
+  .admin-tabs button{flex:1;padding:14px 6px;border:none;background:none;font-size:13px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;}
+  .admin-tabs button.active{color:var(--lavender-dark);border-color:var(--lavender);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--border);text-align:right;}
+  .mini-btn{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:#fff;font-size:12px;margin-left:4px;}
+  .mini-btn.danger{color:var(--danger);border-color:var(--danger);}
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <span></span>
+    <span class="logo" style="font-size:20px;">لوحة التحكم</span>
+    <button class="icon-btn" onclick="admin.logout()">خروج</button>
+  </header>
+
+  <div id="authGate" class="page-wrap"></div>
+
+  <div id="adminPanel" style="display:none;">
+    <div class="admin-tabs">
+      <button id="tabProducts" onclick="admin.showTab('products')" class="active">المنتجات</button>
+      <button id="tabCategories" onclick="admin.showTab('categories')">الأقسام</button>
+      <button id="tabOrders" onclick="admin.showTab('orders')">الطلبات</button>
+    </div>
+    <div id="adminContent" class="page-wrap"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
